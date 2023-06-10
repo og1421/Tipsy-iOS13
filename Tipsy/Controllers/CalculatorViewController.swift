@@ -42,18 +42,19 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func calculatePressed(_ sender: UIButton) {
         let bill = billTextField.text!
-        if bill != ""{
+        if bill != "" {
             billTotal = Double(bill)!
             let result = billTotal * (1 + tip) / Double(numberOfPeople)
             finalResult = String(format: "%.2f", result)
         }
-        self.performSegue(withIdentifier: "goToResult", sender: self)
+        
+        self.performSegue(withIdentifier: "goToResults", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "goToResult" {
-            
+        if segue.identifier == "goToResults" {
+                    
             let destinationVC = segue.destination as! ResultsViewController
             destinationVC.result = finalResult
             destinationVC.tip = Int(tip * 100)
